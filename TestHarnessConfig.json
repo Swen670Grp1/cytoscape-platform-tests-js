@@ -1,0 +1,6 @@
+{
+    "SoftwareTitle": "Cytoscape Test Harness",
+    "SoftwareVersion": "1.0",
+    "TestHarnessSlideNumber":"10",
+    "SendLogToCytoScape":"true"    
+}
