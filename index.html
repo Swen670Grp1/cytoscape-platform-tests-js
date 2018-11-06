@@ -1,18 +1,36 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>reveal.js</title>
-
+		
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/sky.css">
 		<link rel="stylesheet" href="css/swenCustom.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
-
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/main.js"></script>
+		
+		<div id="log-div">
+      <div id="log-button-container">
+        <button type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG">Log</button>
+        <!-- <input type="button" id="log-button" onClick="toggleLog()" value="LOG"/> -->
+      </div>
+      <div id="log-container" style="display:none">
+        <textarea id="log"></textarea>
+      </div>
+    </div>
+		
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -23,6 +41,15 @@
 		</script>
 	</head>
 	<body>
+			<div id="log-div">
+					<div id="log-button-container">
+					  <button type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG">Log</button>
+					  <!-- <input type="button" id="log-button" onClick="toggleLog()" value="LOG"/> -->
+					</div>
+					<div id="log-container" style="display:none">
+					  <textarea id="log"></textarea>
+					</div>
+				  </div>
 		<div class="reveal">
 			<div class="slides">
 				<section>
@@ -37,6 +64,7 @@
 							<label class="labelText">Tester Name:</label>
 							<input type="text" class="form-control" id="usr">
 							</div>
+							<div>
 							<div class="dropdown">
 								<button class="dropbtn">Operating System</button>
 								<div class="dropdown-content">
@@ -45,6 +73,7 @@
 									  <a href="#">Apple OS</a>
 									  <a href="#">Other</a>
 								</div>
+							</div>
 							</div>
 						  </div>
 						</div>
