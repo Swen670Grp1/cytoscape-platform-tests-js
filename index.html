@@ -21,15 +21,7 @@
 		<script src="js/reveal.js"></script>
 		<script src="js/main.js"></script>
 		
-		<div id="log-div">
-      <div id="log-button-container">
-        <button type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG">Log</button>
-        <!-- <input type="button" id="log-button" onClick="toggleLog()" value="LOG"/> -->
-      </div>
-      <div id="log-container" style="display:none">
-        <textarea id="log"></textarea>
-      </div>
-    </div>
+		
 		
 		<!-- Printing and PDF exports -->
 		<script>
@@ -41,15 +33,7 @@
 		</script>
 	</head>
 	<body>
-			<div id="log-div">
-					<div id="log-button-container">
-					  <button type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG">Log</button>
-					  <!-- <input type="button" id="log-button" onClick="toggleLog()" value="LOG"/> -->
-					</div>
-					<div id="log-container" style="display:none">
-					  <textarea id="log"></textarea>
-					</div>
-				  </div>
+			
 		<div class="reveal">
 			<div class="slides">
 				<section>
@@ -57,7 +41,16 @@
 
 						<div class="row">
 						  <div class="column">
-							<p class="paragraphText">Thank you for helping improve the Cytoscape experience.  Use the arrows at the bottom to step through the test.</p>
+              <p class="paragraphText">Thank you for helping improve the Cytoscape experience.  Use the arrows at the bottom to step through the test.</p>
+              <div id="log-div">
+                <div id="log-button-container">
+                  <button type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG">Log</button>
+                  <!-- <input type="button" id="log-button" onClick="toggleLog()" value="LOG"/> -->
+                </div>
+                <div id="log-container" style="display:none">
+                  <textarea id="log"></textarea>
+                </div>
+              </div>
 						  </div>
 						  <div class="column right">
 							<div>
@@ -75,8 +68,9 @@
 								</div>
 							</div>
 							</div>
-						  </div>
-						</div>
+            </div>
+            </div>
+           
 				</section>
 				<section>Slide 2</section>
 			</div>
