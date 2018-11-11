@@ -128,8 +128,6 @@ function runjasmine (slide) {
 
 function feedback(slide){
   setTimeout(() => { showControls(slide) }, 500 )
-  
-
 }
 
 function close_cytoscape_slide(slide){
@@ -322,7 +320,7 @@ function addResponse (name, data) {
   if (!window.DATA.responses.hasOwnProperty(name)) {
     window.DATA.responses[name] = {}
   }
-  window.res = Object.assign(window.DATA.responses[name], data )
+  window.res = Object.assign(window.DATA.responses[name], data)
 }
 
 function log (message, context = 'info') {
