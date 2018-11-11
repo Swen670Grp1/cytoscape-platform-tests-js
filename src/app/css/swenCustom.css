@@ -17,6 +17,7 @@
   text-align: justify;
 }
 .right{
+  padding-top: 50px !important;
   text-align:center !important;
 }
 
@@ -33,7 +34,7 @@
   font-size: 30px !important;
 }
 .labelText{
-  font-size:25px !important;
+  font-size:30px !important;
 }
 input[type=text], select {
   padding: 12px 20px;
