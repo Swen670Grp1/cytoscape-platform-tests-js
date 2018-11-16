@@ -6,10 +6,24 @@ function toggleLog () {
   const log = document.getElementById('log-container')
   log.style.display = log.style.display === 'none' ? 'block' : 'none'
 }
+function loadJSON(callback) {   
 
+  var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+  xobj.open('GET', './lib/TestHarnessConfig.json', true); 
+  xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+  };
+  xobj.send(null);  
+}
 function init (slide) {
   console.debug("Main init", slide, session);
-
+  loadJSON(function(response) {
+    var configuration = JSON.parse(response);
+  });
   addResponse(slide.id, { 'appVersion': window.navigator['appVersion'] })
   showControls(slide);
 }
