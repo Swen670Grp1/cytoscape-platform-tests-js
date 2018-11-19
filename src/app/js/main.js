@@ -19,20 +19,18 @@ function loadJSON(callback) {
   };
   xobj.send(null);  
 }
-function init (slide) {
-  console.debug("Main init", slide, session);
-  loadJSON(function(response) {
-    var configuration = JSON.parse(response);
-  });
-  addResponse(slide.id, { 'appVersion': window.navigator['appVersion'] })
 
 function init(slide) {
   console.debug("Main init", slide, session);
+  //load config file
+    loadJSON(function(response) {
+    var configuration = JSON.parse(response);
+    });
   // define test start time and add to response stack
   var testDate = new Date()
-  addResponse(slide.id, { 'test_date': testDate })
+  addResponse(slide.id, { 'test_date': testDate });
   // define user environment information: OS and browser version and add to response
-  addResponse(slide.id, { 'user_environment': window.navigator['appVersion'] })
+  addResponse(slide.id, { 'user_environment': window.navigator['appVersion'] });
   showControls(slide);
 }
 
@@ -189,7 +187,7 @@ function submitReport() {
     fetch(req_url, { method: 'GET' })
     .then((resp) => resp.json())
     .then(function(data) {
-      log('Jira report submission request sent to api server');
+      log(' report submission request sent to api server');
       let id = data.key;
       log('Jira issue id is: ' + id)
     })
