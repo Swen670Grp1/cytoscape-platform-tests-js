@@ -27,7 +27,7 @@ function init(slide) {
     var configuration = JSON.parse(response);
     });
   // define test start time and add to response stack
-  var testDate = new Date()
+  var testDate = new Date();
   addResponse(slide.id, { 'test_date': testDate });
   // define user environment information: OS and browser version and add to response
   addResponse(slide.id, { 'user_environment': window.navigator['appVersion'] });
@@ -37,18 +37,18 @@ function init(slide) {
 /* SLIDES */
 function close_session(slide) {
   cyCaller.delete('/v1/session', {}, function (r) {
-    showControls(slide)
+    showControls(slide);
   })
 }
 
 function galfiltered(slide) {
-  const url = GALFILTERED
+  const url = GALFILTERED;
   cyCaller.load_file_from_url(url, function (suid) {
     log('Loaded galfiltered with SUID ' + suid, slide.id)
     cyCaller.get('/v1/networks/' + suid + '/edges', function (edges) {
       edges = JSON.parse(edges)
-      log('Edges in galfiltered = ' + edges.length, slide.id)
-      addResponse(slide.id)
+      log('Edges in galfiltered = ' + edges.length, slide.id);
+      addResponse(slide.id);
 
       const check = slide.getElementsByClassName('edgeCountMatches')[0]
       check.labels[0].innerText = 'Edge count is ' + edges.length + '?'
