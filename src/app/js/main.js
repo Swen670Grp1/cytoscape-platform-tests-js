@@ -1,6 +1,6 @@
 window.DATA = { 'log': [], 'responses': {} }
 
-const GALFILTERED = 'https://raw.githubusercontent.com/cytoscape/cytoscape-platform-tests-js/master/networks/galFiltered.cx'
+const GALFILTERED = 'https://raw.githubusercontent.com/cytoscape/cytoscape-platform-tests-js/master/networks/galFiltered.cx';
 
 function toggleLog() {
   const log = document.getElementById('log-container')
@@ -62,7 +62,7 @@ function galfiltered(slide) {
 
         const check = slide.getElementsByClassName('nodeCountMatches')[0]
         check.labels[0].innerText = 'Node count is ' + nodes.length + '?'
-        showControls(slide)
+        showControls(slide);
       })
     })
   })
@@ -502,14 +502,14 @@ Reveal.initialize({
 
 Reveal.addEventListener('slidechanged', function (event) {
   // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-  save_answers(event.previousSlide)
-  call(event.currentSlide)
+  save_answers(event.previousSlide);
+  call(event.currentSlide);
 })
 
 // Creating the test session instance for the user.
 const session = new TestSession();
-const cyCaller = new CyCaller()
+const cyCaller = new CyCaller();
 // Setting the logger callback to the session log.
 cyCaller.setLogCallBack((message,context) => session.log(message,context));
-setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
+setTimeout(() => { call(Reveal.getSlide(0)) }, 500);
 //log('Started Cytoscape Testing', 'init')
