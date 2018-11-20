@@ -6,26 +6,9 @@ function toggleLog() {
   const log = document.getElementById('log-container')
   log.style.display = log.style.display === 'none' ? 'block' : 'none'
 }
-function loadJSON(callback) {   
-
-  var xobj = new XMLHttpRequest();
-      xobj.overrideMimeType("application/json");
-  xobj.open('GET', './lib/TestHarnessConfig.json', true); 
-  xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-          callback(xobj.responseText);
-        }
-  };
-  xobj.send(null);  
-}
 
 function init(slide) {
   console.debug("Main init", slide, session);
-  //load config file
-    loadJSON(function(response) {
-    var configuration = JSON.parse(response);
-    });
   // define test start time and add to response stack
   var testDate = new Date();
   addResponse(slide.id, { 'test_date': testDate });
@@ -33,6 +16,7 @@ function init(slide) {
   addResponse(slide.id, { 'user_environment': window.navigator['appVersion'] });
   showControls(slide);
 }
+
 
 /* SLIDES */
 function close_session(slide) {
