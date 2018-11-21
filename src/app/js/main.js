@@ -458,30 +458,30 @@ function showControls(slide, vis = true) {
   Reveal.configure({ controls: vis })
 }
 
-Reveal.initialize({
-  dependencies: [
-    { src: 'plugin/anything/anything.js' },
-    { src: 'plugin/markdown/marked.js' },
-    { src: 'plugin/markdown/markdown.js' },
-    { src: 'plugin/notes/notes.js', async: true },
-    { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
-  ],
-  anything: [{
-    className: 'cyrest',
-    defaults: { 'title': 'Cytoscape Testing' },
-    initialize: function (container, options) {
-      if (!options) {
-        options = {}
-      }
-      buildSlide(options, container)
-    }
-  }],
-  controlsBackArrows: 'hidden',
-  controlsTutorial: false,
-  progress: false,
-  keyboard: false,
-  overview: false
-})
+// Reveal.initialize({
+//   dependencies: [
+//     { src: 'plugin/anything/anything.js' },
+//     { src: 'plugin/markdown/marked.js' },
+//     { src: 'plugin/markdown/markdown.js' },
+//     { src: 'plugin/notes/notes.js', async: true },
+//     { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+//   ],
+//   anything: [{
+//     className: 'cyrest',
+//     defaults: { 'title': 'Cytoscape Testing' },
+//     initialize: function (container, options) {
+//       if (!options) {
+//         options = {}
+//       }
+//       buildSlide(options, container)
+//     }
+//   }],
+//   controlsBackArrows: 'hidden',
+//   controlsTutorial: false,
+//   progress: false,
+//   keyboard: false,
+//   overview: false
+// })
 
 Reveal.addEventListener('slidechanged', function (event) {
   // event.previousSlide, event.currentSlide, event.indexh, event.indexv
@@ -494,5 +494,11 @@ const session = new TestSession();
 const cyCaller = new CyCaller()
 // Setting the logger callback to the session log.
 cyCaller.setLogCallBack((message,context) => session.log(message,context));
-setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
-//log('Started Cytoscape Testing', 'init')
+// setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
+setTimeout(() => { 
+  Reveal.slide(0);
+  showControls(Reveal.getSlide(0))
+ }, 500);
+
+// log('Started Cytoscape Testing', 'init')
+console.log("App", app);

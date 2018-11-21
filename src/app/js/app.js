@@ -31,17 +31,55 @@ function generateSlides(){
             ];
     arr = [...arr, ...endSlids];
     return arr;
-  } 
+  }
+ 
+ let appSlides = []; 
+ const DEFAULT_REVEAL_OPTIONS = {
+    dependencies: [
+        { src: 'plugin/anything/anything.js' },
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ],
+      anything: [{
+        className: 'cyrest',
+        defaults: { 'title': 'Cytoscape Testing' },
+        initialize: function (container, options) {
+          if (!options) {
+            options = {}
+          }
+        //   buildSlide(options, container)
+        }
+      }],
+      controlsBackArrows: 'hidden',
+      controlsTutorial: false,
+      progress: true,
+      keyboard: false,
+      overview: false
+  }
 
-let app = new Vue({
+
+var app = new Vue({
     el: '#app',
     data: {
-      slides: generateSlides()
+      slides: null
     },
     mounted () {
-      Reveal.initialize();
-      Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+        // Initialize reveal with the options we care about.
+        Reveal.initialize(DEFAULT_REVEAL_OPTIONS);
+        Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+        this.slides = appSlides;
+        // Start with slide 0
+        Reveal.slide(0);
+    },
+    methods: {
+        addSlide: (slide) => {
 
+        },
+        start: () => {
+            
+        }
     }
   });
 
