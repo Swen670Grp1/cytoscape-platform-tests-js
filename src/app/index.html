@@ -53,7 +53,7 @@
     <div class="slides">
 
 			<template v-for="item in slides">
-				<section>
+				<section v-if="item">
 					<div>
 						<h5>{{ item.title }}</h5>
 						<p>{{ item.subtitle }}</p>
