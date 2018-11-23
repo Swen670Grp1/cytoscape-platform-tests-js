@@ -1,5 +1,5 @@
 ;(function(){
-    Reveal.initialize();
+    //Reveal.initialize();
   
     //slide deck wrapper
     deck = $('#blank').parent();
@@ -12,8 +12,8 @@
     $('#blank').remove();
   
     // add some slides
-    slideCreate('Download the <br> Cytoscape Milestone Release','<a href="https://github.com/cytoscape">Go to Github Releases</a>','The installer should create an executable for you');
-    slideCreate('Close Session');
+    //slideCreate('Download the <br> Cytoscape Milestone Release','<a href="https://github.com/cytoscape">Go to Github Releases</a>','The installer should create an executable for you');
+    //slideCreate('Close Session');
 })();
 
 function newslide(firstline,secondline,thirdline){
