@@ -7,6 +7,18 @@ class BaseSlide {
         BaseSlide._id++;
         this._uid = `${this.constructor.name}-${BaseSlide._id}`;
         this._label = label;
+        /**
+         * User inputs for the slide. This takes in the format of
+         *      `{"id": "input1",
+                "text": "XYZ",
+                "type": "text"
+                },
+                {"id": "input2",
+                "text": "Value 2",
+                "type": "text"
+                }`
+         */
+        this.inputs = [];
     }
     /**
      * The Id number of the slide instances created.
@@ -139,10 +151,32 @@ class TestSuite {
     }
 
     generateBaseSlides(){
-        let starterSlide = new TestSlide();
+        let starterSlide = new InstructionSlide();
         // TODO: Add things to do with the starter slides
 
         this._slides.push(starterSlide);
+    }
+}
+
+class InstructionSlide extends BaseSlide {
+    constructor(label) {
+        super(label);
+        /**
+         * The text for the slide.
+         */
+        this.header = "";
+        /**
+         * Breadcrum steps for the slide. These are instructions for the user to follow.
+         */
+        this.steps = [];
+        /**
+         * The user's response to the slide's question.
+         */
+        this.userResponse = "";
+        /**
+         * [Optional] The function operations that the slide will perform. 
+         */
+        this.operations = [];
     }
 }
 
