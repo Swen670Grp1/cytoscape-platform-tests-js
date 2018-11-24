@@ -1,5 +1,4 @@
-function generateSlides(){
-    let arr = [];
+function generateSlides(arr){
     for(let i = 0; i<=10; i++){
         let slide = {};
         if(i == 0){
@@ -63,22 +62,28 @@ function generateSlides(){
 var app = new Vue({
     el: '#app',
     data: {
-      slides: null
+      slides: []
     },
-    mounted () {
-        // Initialize reveal with the options we care about.
-        Reveal.initialize(DEFAULT_REVEAL_OPTIONS);
-        Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
-        this.slides = appSlides;
-        // Start with slide 0
-        Reveal.slide(0);
-    },
+    // mounted () {
+    //     // Initialize reveal with the options we care about.
+    //     Reveal.initialize(DEFAULT_REVEAL_OPTIONS);
+    //     Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+    //     this.start();
+    //     // Start with slide 0
+    //     Reveal.slide(0);
+    // },
     methods: {
         addSlide: (slide) => {
 
         },
-        start: () => {
-            
+        start: function(){
+            console.log("Start Vue app", this);
+             // Initialize reveal with the options we care about.
+            // Reveal.initialize(DEFAULT_REVEAL_OPTIONS);
+            // Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+            this.slides = generateSlides(this.slides);
+            // Reveal.slide(0);
+
         }
     }
   });

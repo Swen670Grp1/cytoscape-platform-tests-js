@@ -1,16 +1,25 @@
 window.DATA = { 'log': [], 'responses': {} }
 
 const GALFILTERED = 'https://raw.githubusercontent.com/cytoscape/cytoscape-platform-tests-js/master/networks/galFiltered.cx'
+var configurationData;
 
 function toggleLog() {
-  const log = document.getElementById('log-container')
-  log.style.display = log.style.display === 'none' ? 'block' : 'none'
+  const log = document.getElementById('log-container');
+  log.style.display = log.style.display === 'none' ? 'block' : 'none';
+}
+
+async function loadConfiguration(){
+  const config = await fetch("../TestHarnessConfig.JSON");
+  return await config.json();
 }
 
 function init(slide) {
   console.debug("Main init", slide, session);
   // define test start time and add to response stack
-  var testDate = new Date()
+  var testDate = new Date();
+  loadConfiguration().then(data => {
+    configurationData = data;
+  });
   addResponse(slide.id, { 'test_date': testDate })
   // define user environment information: OS and browser version and add to response
   addResponse(slide.id, { 'user_environment': window.navigator['appVersion'] })
@@ -458,47 +467,49 @@ function showControls(slide, vis = true) {
   Reveal.configure({ controls: vis })
 }
 
-// Reveal.initialize({
-//   dependencies: [
-//     { src: 'plugin/anything/anything.js' },
-//     { src: 'plugin/markdown/marked.js' },
-//     { src: 'plugin/markdown/markdown.js' },
-//     { src: 'plugin/notes/notes.js', async: true },
-//     { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
-//   ],
-//   anything: [{
-//     className: 'cyrest',
-//     defaults: { 'title': 'Cytoscape Testing' },
-//     initialize: function (container, options) {
-//       if (!options) {
-//         options = {}
-//       }
-//       buildSlide(options, container)
-//     }
-//   }],
-//   controlsBackArrows: 'hidden',
-//   controlsTutorial: false,
-//   progress: false,
-//   keyboard: false,
-//   overview: false
-// })
+// Initialize reveal with the options we care about.
+Reveal.initialize({
+  dependencies: [
+    { src: 'plugin/anything/anything.js' },
+    { src: 'plugin/markdown/marked.js' },
+    { src: 'plugin/markdown/markdown.js' },
+    { src: 'plugin/notes/notes.js', async: true },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+  ],
+  anything: [{
+    className: 'cyrest',
+    defaults: { 'title': 'Cytoscape Testing' },
+    initialize: function (container, options) {
+      if (!options) {
+        options = {}
+      }
+      buildSlide(options, container)
+    }
+  }],
+  controlsBackArrows: 'hidden',
+  controlsTutorial: false,
+  progress: false,
+  keyboard: false,
+  overview: false
+})
 
 Reveal.addEventListener('slidechanged', function (event) {
   // event.previousSlide, event.currentSlide, event.indexh, event.indexv
   save_answers(event.previousSlide)
   call(event.currentSlide)
 })
+Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+
 
 // Creating the test session instance for the user.
 const session = new TestSession();
 const cyCaller = new CyCaller()
 // Setting the logger callback to the session log.
 cyCaller.setLogCallBack((message,context) => session.log(message,context));
-// setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
-setTimeout(() => { 
-  Reveal.slide(0);
-  showControls(Reveal.getSlide(0))
- }, 500);
+
+// Generating the slides needed for this session.
+app.start();
+setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
 
 // log('Started Cytoscape Testing', 'init')
 console.log("App", app);
