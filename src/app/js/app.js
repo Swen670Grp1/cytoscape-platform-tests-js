@@ -62,7 +62,8 @@ function generateSlides(arr){
 var app = new Vue({
     el: '#app',
     data: {
-      slides: []
+      slides: [],
+      isLoading: false
     },
     // mounted () {
     //     // Initialize reveal with the options we care about.
@@ -84,6 +85,13 @@ var app = new Vue({
             this.slides = generateSlides(this.slides);
             // Reveal.slide(0);
 
+        },
+        toggleLoading: function(isOn){
+            if(isOn == true){
+                this.isLoading = isOn;
+            }else{
+                this.isLoading = !this.isLoading;
+            }
         }
     }
   });
