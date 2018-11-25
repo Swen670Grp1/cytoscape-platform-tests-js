@@ -1,0 +1,51 @@
+.titleText{
+    color:#2196F3;
+    padding-bottom: 25px !important;
+}
+.openingText{
+    font-size: 20px !important;
+}
+.log-div{
+  position: relative;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  height: 300px; /* Should be removed. Only for demonstration */
+  text-align: justify;
+}
+.right{
+  text-align:center !important;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.paragraphText{
+  font-size: 30px !important;
+}
+.labelText{
+  font-size:25px !important;
+}
+input[type=text], select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width:50% !important;
+}
+
+.dropdown-item{
+  font-size: 25px !important;
+
+}
