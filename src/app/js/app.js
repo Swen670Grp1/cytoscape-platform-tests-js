@@ -58,7 +58,11 @@ function generateSlides(arr){
       overview: false
   }
 
-
+/**
+ * The driver for the VueJs app. We can have the business logicig for things like grabbing 
+ * the logs and submitting them. Or we can just put this in main.js. I used a different
+ * file so it would be easier to review. 
+ */
 var app = new Vue({
     el: '#app',
     data: {
