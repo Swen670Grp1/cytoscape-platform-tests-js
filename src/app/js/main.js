@@ -1,7 +1,7 @@
-window.DATA = { 'log': [], 'responses': {} }
+window.DATA = { 'log': [], 'responses': {} };
 
 
-const GALFILTERED = 'https://raw.githubusercontent.com/cytoscape/cytoscape-platform-tests-js/master/networks/galFiltered.cx'
+const GALFILTERED = 'https://raw.githubusercontent.com/cytoscape/cytoscape-platform-tests-js/master/networks/galFiltered.cx';
 var configurationData;
 
 
@@ -46,7 +46,7 @@ function init(slide) {
 function close_session(slide) {
   cyCaller.delete('/v1/session', {}, function (r) {
     showControls(slide);
-  })
+  });
 }
 
 function galfiltered(slide) {
@@ -84,7 +84,7 @@ function diffusion(slide) {
       })
     })
   }
-  const url = GALFILTERED
+  const url = GALFILTERED;
   cyCaller.load_file_from_url(url, function (suid) {
     cyCaller.get('/v1/networks/' + suid + '/tables/defaultnode/rows', function (r) {
       const rows = JSON.parse(r)
@@ -99,7 +99,7 @@ function diffusion(slide) {
 }
 
 function layout(slide) {
-  const url = GALFILTERED
+  const url = GALFILTERED;
   cyCaller.load_file_from_url(url, function (suid) {
     cyCaller.get('/v1/apply/layouts/circular/' + suid,
       function () {
@@ -110,8 +110,8 @@ function layout(slide) {
 
 function session_save(slide) {
   const post_save = (loc) => {
-    initDropArea(slide, "cysDrop", 'Saved session file to ' + loc + '.cys', '.cys', handleCYS)
-    showControls(slide)
+    initDropArea(slide, "cysDrop", 'Saved session file to ' + loc + '.cys', '.cys', handleCYS);
+    showControls(slide);
   }
   const url = GALFILTERED
   cyCaller.load_file_from_url(url, function (suid) {
@@ -157,7 +157,7 @@ function feedback(slide) {
 
 function close_cytoscape_slide(slide) {
   setTimeout(() => { showControls(slide) }, 500)
-  let text = "Default location is in your Home Directory, at <br/>~/CytoscapeConfiguration/3/framework.log"
+  let text = "Default location is in your Home Directory, at <br/>~/CytoscapeConfiguration/3/framework.log";
   if (window.logFilePath) {
     text = "Load log file from " + window.logFilePath
   }
@@ -465,5 +465,5 @@ const session = new TestSession();
 const cyCaller = new CyCaller();
 // Setting the logger callback to the session log.
 cyCaller.setLogCallBack((message, context) => session.log(message, context));
-setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
+setTimeout(() => { call(Reveal.getSlide(0)) }, 500);
 //log('Started Cytoscape Testing', 'init')
