@@ -1,12 +1,11 @@
-function generateSlides(arr){
+function generateSlides(){
+    let arr = [];
     for(let i = 0; i<=10; i++){
         let slide = {};
         if(i == 0){
-            slide = {
-                title: `CYTOSCAPE TESTINGfmfsjfskfsjsfjksfdfsjkdfsjkdslkjdsklnjds`,
-                question: "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests. ",
-                input: "",
-              };
+            slide.title = `CYTOSCAPE TESTINGfmfsjfskfsjsfjksfdfsjkdfsjkdslkjdsklnjds`;
+            slide.question = "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests. ";
+            slide.input = "";
         } else {
             slide = {
                 title: `Slide-${i}`,
@@ -89,7 +88,7 @@ var app = new Vue({
             // Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
             let testSuite = initDefaultSuite();
             this.slides = testSuite._slides;
-            // this.slides = generateSlides(this.slides);
+            // this.slides = generateSlides();
             // Reveal.slide(0);
 
         },

@@ -105,7 +105,7 @@
       <template v-for="item in slides">
 				<section v-bind:id="item.uid" v-if="item">
 					<div class="cyrest">
-						<h5>{{ item.title }} fff</h5>
+						<h5 v-html="item.title">{{ item.title }}</h5>
             <p v-html="item.question">{{ item.question }}</p>
             <div class="slide-steps" v-if="item.steps">
               <div class="step" v-for="step in item.steps">
@@ -115,8 +115,7 @@
             <div class="slide-options" v-if="item.options">
               <div class="option" v-for="option in item.options">
                 <label v-html="option.label">{{ option.label }}</label>
-                <input type="option.type" v-model="option.input" placeholder="edit me">
-                <p>User Input is: {{ option.input }}</p>        
+                <input v-bind:id="option.id" v-bind:type="option.type" v-model="option.actualValue">
               </div>
             </div>
 					</div>
