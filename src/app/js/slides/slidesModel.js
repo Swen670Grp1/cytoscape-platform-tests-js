@@ -2,23 +2,34 @@
  * The base class for Slides.
  */
 class BaseSlide {
-    constructor(label = DEFAULT_LABEL) {
+    constructor(label = Object.assign({},DEFAULT_LABEL)) {
         if (!BaseSlide._id) { BaseSlide._id = 0; }
         BaseSlide._id++;
         this._uid = `${this.constructor.name}-${BaseSlide._id}`;
         this._label = label;
         /**
-         * User inputs for the slide. This takes in the format of
+         * [Optional] Options for the slide. If it's a test, then it would be possible options for the 
+         * question's answer. The user inputs for the slide are stored in here. This takes in the format of
          *      `{"id": "input1",
-                "text": "XYZ",
-                "type": "text"
+                "label": "XYZ",
+                "type": "checkbox",
+                "expectedValue": true,
+                "actualValue": null
                 },
                 {"id": "input2",
-                "text": "Value 2",
-                "type": "text"
+                "label": "Value 2",
+                "type": "text",
+                "expectedValue": true,
+                "actualValue": null
                 }`
          */
-        this.inputs = [];
+        this.options = [];
+
+        /**
+         * The title of the slide.
+         */
+        this.title = "";
+
     }
     /**
      * The Id number of the slide instances created.
@@ -38,6 +49,19 @@ class BaseSlide {
     toString() {
         return this._uid;
     }
+
+    addOption(label, expectedValue, type = "checkbox" || "text"){
+        if (!BaseSlide.optionId) { BaseSlide.optionId = 0; }
+        BaseSlide.optionId++;
+        let newOption = {
+            id:BaseSlide.optionId,
+            type: type,
+            label: label,
+            expectedValue: expectedValue,
+            actualValue: null
+        }
+        this.options.push(newOption);
+    }
 }
 
 /**
@@ -52,11 +76,6 @@ class TestSlide extends BaseSlide {
          * The question or text for the slide.
          */
         this.question = "";
-        /**
-         * [Optional] Options for the slide. If it's a test, then it would be possible options for the 
-         * question's answer.
-         */
-        this.options = [];
         /**
          * Breadcrum steps for the slide. These can be instructions for the user to follow.
          */
@@ -128,7 +147,7 @@ class TestSlide extends BaseSlide {
      * @param {*} operation function to run
      */
     addTestOperation(operation) {
-        if (operation.constructor.name === "Function") {
+        if (operation.constructor.name === "Function" || operation.constructor.name === "AsyncFunction") {
             this.operations.push(operation);
         } else {
             console.error("An invalid operation was attepted to be added.");
@@ -148,6 +167,21 @@ class TestSuite {
          * A collection of Test Slides in the Test Suite.
          */
         this._slides = [];
+    }
+
+    /**
+     * Returns an optional label for the test suite. 
+     * This can be used to specify a group of related tests.
+     */
+    get label(){
+        return this._label;
+    }
+
+    /**
+     * Returns the collection of Test Slides in the Test Suite.
+     */
+    get slides(){
+        return this._slides;
     }
 
     generateBaseSlides(){

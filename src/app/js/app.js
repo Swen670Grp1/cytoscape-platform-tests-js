@@ -3,14 +3,15 @@ function generateSlides(arr){
         let slide = {};
         if(i == 0){
             slide = {
-                title: `CYTOSCAPE TESTING`,
-                subtitle: "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests. ",
+                title: `CYTOSCAPE TESTINGfmfsjfskfsjsfjksfdfsjkdfsjkdslkjdsklnjds`,
+                question: "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests. ",
                 input: "",
               };
         } else {
             slide = {
                 title: `Slide-${i}`,
-                subtitle: "",
+                question: `       <a href="https://github.com/cytoscape/cytoscape-gui-distribution/releases" target="_blank"><u>Go to Github Releases</u></a>
+                `,
                 input: "",
             };
         }
@@ -20,12 +21,12 @@ function generateSlides(arr){
     let endSlids = [
         {
             title: `Thanks for testing Cytoscape!`,
-            subtitle: "Please submit yout framework.log",
+            question: "Please submit yout framework.log",
             input: "",
         }, 
         {
             title: `Submit your testing results`,
-            subtitle: "",
+            question: "",
         },      
             ];
     arr = [...arr, ...endSlids];
@@ -86,7 +87,9 @@ var app = new Vue({
              // Initialize reveal with the options we care about.
             // Reveal.initialize(DEFAULT_REVEAL_OPTIONS);
             // Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
-            this.slides = generateSlides(this.slides);
+            let testSuite = initDefaultSuite();
+            this.slides = testSuite._slides;
+            // this.slides = generateSlides(this.slides);
             // Reveal.slide(0);
 
         },

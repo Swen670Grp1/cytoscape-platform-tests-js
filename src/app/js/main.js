@@ -483,6 +483,6 @@ const cyCaller = new CyCaller()
 cyCaller.setLogCallBack((message, context) => session.log(message, context));
 // Generating the slides needed for this session.
 app.start();
-setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
+setTimeout(() => { call(Reveal.getSlide(0)) }, 1000)
 // log('Started Cytoscape Testing', 'init')
 console.log("App", app);

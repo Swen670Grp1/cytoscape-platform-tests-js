@@ -30,6 +30,7 @@
   <script src="js/cycaller.js"></script>
   <script src="js/slides/session.js"></script>
   <script src="js/slides/slidesModel.js"></script>
+  <script src="js/slides/testSuites.js"></script>
   <script src="spec/cytoscape_spec.js"></script>
   <!-- Printing and PDF exports -->
   <script>
@@ -63,9 +64,9 @@
   <div id="reveal-container" style="width: 100%; height: 100%">
   <div>
     <div class="slides">	  
-      <section id="init">
+      <!-- <section id="init">
           <div class="cyrest">
-            <!--{
+            <!- {
               "title": "Cytoscape Testing",
               "text": "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests.",
               "inputs": [
@@ -77,17 +78,17 @@
                 "text": "Operating System",
                 "type": "text"
                 }]
-            }-->
+            } ->
           </div>
-      </section>
-      <section id="install">
+      </section> -->
+      <!-- <section id="install">
         <h2>Download the Cytoscape Milestone Release</h2>
         <a href="https://github.com/cytoscape/cytoscape-gui-distribution/releases" target="_blank"><u>Go to Github Releases</u></a>
         <p>The installer should create an executable for you.</p>
-      </section>
-      <section id="close_session">
+      </section> -->
+      <!-- <section id="close_session">
         <div class="cyrest">
-        <!--{
+        <!-{
         "title": "Close Session",
         "text": "Let's create a new session and start testing!",
         "inputs": [
@@ -97,17 +98,27 @@
           "type": "text"
         }
         ]
-        }-->
+        }->
         </div>
-      </section>
+      </section> -->
 
       <template v-for="item in slides">
-				<section v-if="item">
-					<div>
-						<h5>{{ item.title }}</h5>
-						<p>{{ item.subtitle }}</p>
-						<input v-model="item.input" placeholder="edit me">
-						<p>User Input is: {{ item.input }}</p>        
+				<section v-bind:id="item.uid" v-if="item">
+					<div class="cyrest">
+						<h5>{{ item.title }} fff</h5>
+            <p v-html="item.question">{{ item.question }}</p>
+            <div class="slide-steps" v-if="item.steps">
+              <div class="step" v-for="step in item.steps">
+                <p v-html="step">{{ step }}</p>
+              </div>
+            </div>
+            <div class="slide-options" v-if="item.options">
+              <div class="option" v-for="option in item.options">
+                <label v-html="option.label">{{ option.label }}</label>
+                <input type="option.type" v-model="option.input" placeholder="edit me">
+                <p>User Input is: {{ option.input }}</p>        
+              </div>
+            </div>
 					</div>
 				</section>
       </template>
@@ -157,7 +168,7 @@
         }-->
         </div>
       </section>
-      
+
       <section id="session_save">
         <h2>Session Save</h2>
         <p class="text">Saving Cytoscape session file...</p>

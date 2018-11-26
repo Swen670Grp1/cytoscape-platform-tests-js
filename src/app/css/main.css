@@ -196,6 +196,7 @@ section#install p{
   padding-left: 25%;
   display: block;
   width: 75%;
+  font-size: 15px;
 }
 
 #error-text{
