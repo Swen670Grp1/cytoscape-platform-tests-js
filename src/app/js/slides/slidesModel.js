@@ -1,6 +1,8 @@
 /**
  * The base class for Slides.
  */
+
+
 class BaseSlide {
     constructor(label = Object.assign({},DEFAULT_LABEL)) {
         if (!BaseSlide._id) { BaseSlide._id = 0; }
