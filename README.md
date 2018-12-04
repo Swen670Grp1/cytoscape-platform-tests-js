@@ -21,7 +21,7 @@ Cytoscape is intended to operate across multiple platforms (Windows, Mac, Linux,
 
 ### API
 
-The CyCaller class resides in `js/cycaller.js` and acts as the main communicator with Cytoscape. All calls to CyREST are made via a CyCaller instance. Here is a simple script for using CyCaller:
+The CyCaller class resides in `src/app/js/cycaller.js` and acts as the main communicator with Cytoscape. All calls to CyREST are made via a CyCaller instance. Here is a simple script for using CyCaller:
 
 ```python
 const caller = new CyCaller()
@@ -75,6 +75,11 @@ get_network_suid (callback)
 """ Fetch the SUID of the currently selected subnetwork and pass it to the callback
 """
 ```
+These functions also return as promises which allow for cleaner and easier to read code.
+
+
+### Pre-setup
+To utilize this harness against Cytoscape 3.7+, be sure to download cytoscape on your machine via the [The Official Cytoscape downlaod page](https://cytoscape.org/download.html). Or simplly precede to the [Developer Instructions](#developer-instructions) and follow the instructions to install Cytoscape presented in the test harness.
 
 ## Developer Instructions
 
@@ -82,13 +87,30 @@ If you would like to contribute to the Cytoscape platform tests, please read the
 
 ### Full setup
 
-To setup a local server and view the reveal.js testing slides that we have created, do the following:
+To setup a local server and view the reveal.js testing slides that we have created, do the following, below. However, if you want to skip all the steps, here is the TLDR.
+Paste and execute this block to clone the Test harness repository and check out the desired branch:
+```
+DIR=${HOME}/projects
+BRANCH=develop
+
+cd $DIR && \
+git clone https://github.com/Swen670Grp1/cytoscape-platform-tests-js.git && \
+cd cytoscape-platform-tests-js && \
+git checkout $BRANCH
+npm install && \
+npm run build && \
+npm run start:server
+
+```
+
+If the previous block was run in a terminal, skip to step 7 and only execute steps 7-9.
+
 
 1. Install [Node.js](http://nodejs.org/) (4.0.0 or later). We use [Grunt](https://github.com/gruntjs/grunt) to simplify the build process
 
 1. Clone the repository
    ```sh
-   $ git clone https://github.com/cytoscape/cytoscape-platform-tests-js.git
+   $ git clone https://github.com/Swen670Grp1/cytoscape-platform-tests-js.git
    ```
 
 1. Navigate to the folder
@@ -96,38 +118,60 @@ To setup a local server and view the reveal.js testing slides that we have creat
    $ cd cytoscape-platform-tests-js
    ```
 
+1. Checkout the appropriate branch (develop or master)
+   ```sh
+   $ git checkout develop
+   ```
+
 1. Install dependencies
    ```sh
    $ npm install
    ```
 
-1. Serve the presentation and monitor source files for changes
+1. Build the webapp
    ```sh
-   $ npm start
+   $ npm run build
    ```
-   or
-   ```sh
-   $ grunt serve
-   ```
-   
-1. Open <http://localhost:8000> to view the slides
 
-   You can change the port by using `npm start -- --port=8001`.
+1.  Open the .env file, located at the root of the project and ensure that there exists entries for the `JIRA_API_KEY` and `JIRA_URL`. If not copy and paste the following into the file:
+    ```sh
+    JIRA_API_KEY="[PLACE YOUR TOKEN HERE]"
+    JIRA_URL="https://cytoscape.atlassian.net/rest/api/3/issue/"'
+    ```
+    Be sure to replace [PLACE YOUR TOKEN HERE], including the brackets, with your valid API token for Jira.
+
+1. Serve the presentation and monitor source files for changes by doing A or B.
    
-   
-1. To build the standalone webapp, run the build command via grunt
+   - A
    ```sh
-   $ grunt build
+   $ npm run start:server
    ```
+
+   - B
+   ```sh
+   $ npm run start (for the standalone Web app)
+   ```
+   
+1. If option A was done in the previous step, open <http://localhost:8080> to view the slides.
+
+    If option B was done in the previous step, open <http://localhost:8000> to view the slides. You can change the port by using `npm run start -- --port=8001`.
+   
+   
+1. To build the standalone webapp, run the build command via npm
+   ```sh
+   $ npm run build
+   ```
+### Test Deck Report Log Structure
+TBD
 
 ### Folder Structure
 
-- **docs/** The compiled reveal.js slides webapp
-- **js/cycaller.js** The Cytoscape platform testing Javascript API
-- **networks/** Cytoscape network files for testing
-- **spec/** The Jasmine spec file describing automated tests
-- **plugin/** Components that have been developed as extensions to reveal.js
-- **lib/** All other third party assets (JavaScript, CSS, fonts)
+- **src/app/js/cycaller.js** The Cytoscape platform testing Javascript API
+- **src/app/networks/** Cytoscape network files for testing
+- **src/app/spec/** The Jasmine spec file describing automated tests
+- **src/app/plugin/** Components that have been developed as extensions to reveal.js
+- **src/app/lib/** All other third party assets (JavaScript, CSS, fonts)
+
 
 ## Issues
 
