@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -31,6 +32,7 @@
   <script src="js/logger.js"></script>
   <script src="js/slides/session.js"></script>
   <script src="js/slides/slidesModel.js"></script>
+  <script src="js/slides/testSuites.js"></script>
   <script src="spec/cytoscape_spec.js"></script>
   <!-- Printing and PDF exports -->
   <script>
@@ -42,6 +44,8 @@
   </script>
 </head>
   <body>
+	  <div id="app" class="reveal">
+
     <div id="log-div">
       <div id="log-button-container">
         <input type="button" id="log-button" onClick="toggleLog()" class="btn btn-primary" value="LOG"/>
@@ -60,11 +64,11 @@
       </div>
     </div>
   <div id="reveal-container" style="width: 100%; height: 100%">
-  <div class="reveal">
-    <div class="slides">
-      <section id="init">
+  <div>
+    <div class="slides">	  
+      <!-- <section id="init">
           <div class="cyrest">
-            <!--{
+            <!- {
               "title": "Cytoscape Testing",
               "text": "Thank you for helping improve the Cytoscape experience. Use the arrow at the bottom to step through tests.",
               "inputs": [
@@ -72,37 +76,58 @@
                 "text": "Name",
                 "type": "text"
                 }]
-            }-->
+            } ->
           </div>
-      </section>
-      <section id="install">
+      </section> -->
+      <!-- <section id="install">
         <h2>Download the Cytoscape Milestone Release</h2>
         <a href="https://github.com/cytoscape/cytoscape-gui-distribution/releases" target="_blank"><u>Go to Github Releases</u></a>
         <p>The installer should create an executable for you.</p>
-      </section>
-      <section id="close_session">
+      </section> -->
+      <!-- <section id="close_session">
         <div class="cyrest">
-        <!--{
+        <!-{
         "title": "Close Session",
         "text": "Let's create a new session and start testing!",
         "inputs": [
         {
           "id": "new_session",
           "text": "Is the Cytoscape Network panel empty?",
-          "type": "checkbox"
+          "type": "text"
         }
         ]
-        }-->
+        }->
         </div>
-      </section>
+      </section> -->
+
+      <template v-for="item in slides">
+				<section v-bind:id="item.uid" v-if="item">
+					<div class="cyrest">
+						<h5 v-html="item.title">{{ item.title }}</h5>
+            <p v-html="item.question">{{ item.question }}</p>
+            <div class="slide-steps" v-if="item.steps">
+              <div class="step" v-for="step in item.steps">
+                <p v-html="step">{{ step }}</p>
+              </div>
+            </div>
+            <div class="slide-options" v-if="item.options">
+              <div class="option" v-for="option in item.options">
+                <label v-html="option.label">{{ option.label }}</label>
+                <input v-bind:id="option.id" v-bind:type="option.type" v-model="option.actualValue">
+              </div>
+            </div>
+					</div>
+				</section>
+      </template>
+      
       <section id="galfiltered">
         <div class="cyrest">
         <!--{
-        "title": "GalFiltered.cys Test",
+        "title": "GalFiltered.cys Test YEA",
         "inputs": [
         {
           "id": "nodeCountMatches",
-          "type": "checkbox",
+          "type": "text",
           "text": "Getting node count..."
         },{
           "id": "edgeCountMatches",
@@ -140,6 +165,7 @@
         }-->
         </div>
       </section>
+
       <section id="session_save">
         <h2>Session Save</h2>
         <p class="text">Saving Cytoscape session file...</p>
@@ -182,8 +208,10 @@
 </div>
   <div id="tests">
   </div>
+</div>
   <script src="lib/js/head.min.js"></script>
   <script src="js/reveal.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/main.js"></script>
 </body>
 

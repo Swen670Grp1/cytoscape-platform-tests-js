@@ -462,6 +462,7 @@ function showControls(slide, vis = true) {
   Reveal.configure({ controls: vis })
 }
 
+// Initialize reveal with the options we care about.
 Reveal.initialize({
   dependencies: [
     { src: 'plugin/anything/anything.js' },
@@ -492,11 +493,15 @@ Reveal.addEventListener('slidechanged', function (event) {
   save_answers(event.previousSlide)
   call(event.currentSlide)
 })
+Reveal.configure({ controls: false, slideNumber: 'c/t', progress: true });
+
 
 // Creating the test session instance for the user.
 const session = new TestSession();
 const cyCaller = new CyCaller()
 // Setting the logger callback to the session log.
 cyCaller.setLogCallBack((message, context) => Logger.getInstance().log(message, context));
+// Generating the slides needed for this session.
+app.start();
 setTimeout(() => { call(Reveal.getSlide(0)) }, 500)
 //log('Started Cytoscape Testing', 'init')
